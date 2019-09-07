@@ -20,12 +20,15 @@ class VideoDetect:
    # ============== Faces==============
    def StartFaceDetection(self):
         response=self.rek.start_face_detection(
-           Video={
+           FaceAttributes = "ALL",
+           Video = {
               'S3Object': {
                  'Bucket': self.bucket, 
                   'Name': self.video
                }
-            },
+            }
+        )
+        
         self.startJobId=response['JobId']
         print('Start Job Id: ' + self.startJobId)
 
@@ -48,11 +51,13 @@ class VideoDetect:
             print('Duration: ' + str(response['VideoMetadata']['DurationMillis']))
             print('Format: ' + response['VideoMetadata']['Format'])
             print('Frame rate: ' + str(response['VideoMetadata']['FrameRate']))
-            print()
+            print('\n\n information about faces is gonna print\n----\n')
+
 
             for faceDetection in response['Faces']:
-                print('Face: ' + str(faceDetection['Face']))
-                print('Confidence: ' + str(faceDetection['Face']['Confidence']))
+               #  print('Face' + str(faceDetection['Face']))
+                print('Emotions: ' + str(faceDetection['Face']['Emotions']))
+               #  print('Confidence: ' + str(faceDetection['Face']['Emotions']['Confidence']))
                 print('Timestamp: ' + str(faceDetection['Timestamp']))
                 print()
 
@@ -61,10 +66,11 @@ class VideoDetect:
             else:
                 finished = True
 
-def main():
-   # roleArn = ''   
+def main():  
    bucket = 'storagepennapps19'
+   # video = 'smile_video_2.mov'
    video = 'smile_video.mp4'
+   # video = 'emotion_1.mp4'
 
    analyzer=VideoDetect(bucket,video)
    analyzer.StartFaceDetection()
