@@ -1,2 +1,2 @@
 # rekognition-lambda
-lambda function for AWS facial rekognition
+   the lambda function for AWS facial rekognition
