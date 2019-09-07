@@ -1,6 +1,7 @@
 import boto3
 import json
 import os
+import time
 
 os.environ['AWS_DEFAULT_REGION'] = "us-east-1"
 class VideoDetect:
@@ -38,6 +39,7 @@ class VideoDetect:
 
          while finished == False:
             while(True):
+               time.sleep(1)
                response = self.rek.get_face_detection(JobId=self.startJobId,
                                             MaxResults=maxResults,
                                             NextToken=paginationToken)
