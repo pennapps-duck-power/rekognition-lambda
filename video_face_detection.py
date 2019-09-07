@@ -26,11 +26,6 @@ class VideoDetect:
                   'Name': self.video
                }
             },
-            # NotificationChannel={
-            #    'RoleArn': self.roleArn, 
-            #    'SNSTopicArn': self.snsTopicArn
-            #    }
-            )
         self.startJobId=response['JobId']
         print('Start Job Id: ' + self.startJobId)
 
@@ -72,8 +67,6 @@ def main():
    video = 'smile_video.mp4'
 
    analyzer=VideoDetect(bucket,video)
-   # analyzer.CreateTopicandQueue()
-
    analyzer.StartFaceDetection()
    # if analyzer.GetSQSMessageSuccess()==True:
    analyzer.GetFaceDetectionResults()
