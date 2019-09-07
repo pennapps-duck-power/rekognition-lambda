@@ -2,7 +2,6 @@ import boto3
 import json
 import os
 
-os.environ['AWS_PROFILE'] = "Shane"
 os.environ['AWS_DEFAULT_REGION'] = "us-east-1"
 class VideoDetect:
    JobId = ''
@@ -12,7 +11,7 @@ class VideoDetect:
    video=''
    startJobId = ''
 
-   def __init__(self, bucket, video):    
+   def __init__(self, bucket, video):
       self.bucket = bucket
       self.video = video
 
@@ -22,12 +21,12 @@ class VideoDetect:
            FaceAttributes = "ALL",
            Video = {
               'S3Object': {
-                 'Bucket': self.bucket, 
+                 'Bucket': self.bucket,
                   'Name': self.video
                }
             }
         )
-        
+
         self.startJobId=response['JobId']
       #   print('Start Job Id: ' + self.startJobId)
       # TODO: store JobId should be better than storing the name of the video in case of interrupts during the analyzing
@@ -67,7 +66,7 @@ class VideoDetect:
                 finished = True
                 return data
 
-# def main():  
+# def main():
    # bucket = 'storagepennapps19'
    # # video = 'smile_video_2.mov'
    # video = 'smile_video.mp4'
@@ -80,13 +79,13 @@ class VideoDetect:
 def lambda_handler(event, context):
    bucket = event['bucket']
    video = event['video']
-   
+
    ret = []
    ret.append('video: ' + video)
    analyzer = VideoDetect(bucket, video)
    analyzer.StartFaceDetection()
    ret.append(analyzer.GetFaceDetectionResults())
-   return ret 
+   return ret
 
 
 
