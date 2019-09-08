@@ -33,7 +33,7 @@ class VideoDetect:
       # TODO: store JobId should be better than storing the name of the video in case of interrupts during the analyzing
 
    def GetFaceDetectionResults(self):
-         maxResults = 10
+         maxResults = 1000 # use the default value, also the maximum to generate the most labels
          paginationToken = ''
          finished = False
 
@@ -53,6 +53,7 @@ class VideoDetect:
             # print('Frame rate: ' + str(response['VideoMetadata']['FrameRate']))
             # print('\n\n information about faces is gonna print\n----\n')
 
+        
             data = []
             for faceDetection in response['Faces']:
                data.append('Emotions: ' + str(faceDetection['Face']['Emotions']))
@@ -70,7 +71,7 @@ class VideoDetect:
 
 # def main():
    # bucket = 'storagepennapps19'
-   # # video = 'smile_video_2.mov'
+   # video = 'smile_video_2.mov'
    # video = 'smile_video.mp4'
    # video = 'emotion_1.mp4'
 
