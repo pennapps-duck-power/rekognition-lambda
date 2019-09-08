@@ -51,11 +51,9 @@ class VideoDetect:
             # print('Frame rate: ' + str(response['VideoMetadata']['FrameRate']))
             # print('\n\n information about faces is gonna print\n----\n')
 
-            # for testing and counting purpose only 
-            count = 0
+        
             data = []
             for faceDetection in response['Faces']:
-               count = count + 1
                data.append('Emotions: ' + str(faceDetection['Face']['Emotions']))
                data.append('Timestamp: ' + str(faceDetection['Timestamp']))
                # data.append('')
@@ -66,7 +64,6 @@ class VideoDetect:
             if 'NextToken' in response:
                 paginationToken = response['NextToken']
             else:
-                print('COUNT IS ' + (str)(count))
                 finished = True
                 return data
 
